@@ -4,9 +4,9 @@ import { FaSearch } from 'react-icons/fa';
 
 import { getSearchResult } from '../../services/searchProduct.services';
 
-export default function SearchBar() {
+export default function SearchBar({setProducts}) {
     const [ search, setSearch ] = useState('');
-    const [ products, setProducts ] = useState([]);
+ 
 
     const handleSubmit = (e) => {
         e.preventDefault();
