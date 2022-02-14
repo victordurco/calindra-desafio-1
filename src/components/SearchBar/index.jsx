@@ -1,11 +1,29 @@
+import { useState } from 'react';
 import styled from 'styled-components';
-import {FaSearch} from 'react-icons/fa';
+import { FaSearch } from 'react-icons/fa';
+
+import { getSearchResult } from '../../services/searchProduct.services';
 
 export default function SearchBar() {
+    const [ search, setSearch ] = useState('');
+    const [ products, setProducts ] = useState([]);
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        getSearchResult(search)
+            .then((res)=>{
+                setProducts(res.data.products);
+            })
+            .catch((err)=> console.error(err));
+    };
+
     return(
         <Container>
-            <Form>
-                <Input placeholder="Digite sua busca" />
+            <Form onSubmit={handleSubmit}>
+                <Input 
+                    placeholder="Digite sua busca" 
+                    onChange={(e)=> setSearch(e.target.value)}
+                />
                 <SearchButton>
                     <FaSearch />
                 </SearchButton>
