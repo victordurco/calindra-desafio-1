@@ -10,7 +10,8 @@ export default function SearchBar({setProducts}) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        getSearchResult(search)
+        let searchString = search.replace(' ', '%20');
+        getSearchResult(searchString)
             .then((res)=>{
                 setProducts(res.data.products);
             })
